@@ -1,0 +1,3 @@
+install.packages('readxl')
+dat<-readxl::read_xls('GSSlab3data.xls')
+dat
