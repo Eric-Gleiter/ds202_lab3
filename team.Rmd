@@ -1,3 +1,27 @@
-install.packages('readxl')
-dat<-readxl::read_xls('GSSlab3data.xls')
-dat
+---
+title: "Lab 3"
+author: "Eric Gleiter; Brandon Xicon"
+date: "2/19/2020"
+output: html_document
+---
+
+```{r}
+if (!require("readxl")) {
+install.packages("readxl")
+}
+if (!require("ggplot2")) {
+install.packages("ggplot2")
+}
+dat<- readxl::read_xls('GSSlab3data.xls')
+
+```
+
+Question 1)
+```{r}
+str(dat)
+
+dat$married <- factor(dat$`Marital status`, levels= c('Never married', 'Married','Widowed','Divorced','No answer','Separated'))
+dat$happy <- factor(dat$`General happiness`, levels = c('Very happy','Pretty happy','Not too happy','No answer','Not applicable','Don\'t know'))
+dat$sex <- factor(dat$`Respondents sex`, levels = c('Female','Male'))
+ggplot(data = dat, aes(x=happy, fill=married)) + geom_bar(position = 'Dodge') + facet_wrap(vars(sex))
+```
