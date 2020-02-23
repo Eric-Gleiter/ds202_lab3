@@ -20,7 +20,7 @@ Question 1)
 ```{r}
 
 
-dat$married <- factor(dat$`Marital status`, levels= c('Never married', 'Married','Widowed','Divorced','No answer','Separated'))
+dat$married <- factor(dat$`Marital status`, levels= c('Never married', 'Married','Widowed','Divorced','Separated','No answer'))
 dat$happy <- factor(dat$`General happiness`, levels = c('Very happy','Pretty happy','Not too happy','No answer','Not applicable','Don\'t know'))
 dat$sex <- factor(dat$`Respondents sex`, levels = c('Female','Male'))
 ggplot(data = dat, aes(x=married, fill=happy)) + geom_bar(position = 'Dodge') +xlab("Marital Status") + ylab("Number of respondents") + labs(title="Number of Responents by Happiness level")
@@ -30,6 +30,8 @@ Looking at the bar graph we can see a few common patterns in that the most commo
 
 Question 2)
 ```{r}
-ggplot(data = dat, aes(x=married, fill=happy)) + geom_bar(position = 'Dodge') + facet_wrap(vars(sex))
+ggplot(data = dat, aes(x=married, fill=happy)) + geom_bar(position = 'Dodge') + theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5)) + facet_wrap(vars(sex)) +xlab("Marital Status") + ylab("Number of respondents") + labs(title="Number of Responents by Happiness level, faceted by sex")
 ```
+Comparing the two the only real diiference is that across the board men are more likely to respond as "not to happy" and not "very happy" so I would say that not the sex does not affect the relationships found in question 1.
+
 
