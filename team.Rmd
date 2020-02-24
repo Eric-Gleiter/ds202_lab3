@@ -13,33 +13,43 @@ if (!require("ggplot2")) {
 install.packages("ggplot2")
 }
 dat<- readxl::read_xls('GSSlab3data.xls')
-
+dat1 <- dat[!is.na(dat$'Marital status'), ]
+dat1 <- dat1[dat1$`Age of respondent` != 'No answer',]
 ```
 
 Question 1)
 ```{r}
 
 
-dat$married <- factor(dat$`Marital status`, levels= c('Never married', 'Married','Widowed','Divorced','Separated','No answer'))
-dat$happy <- factor(dat$`General happiness`, levels = c('Very happy','Pretty happy','Not too happy','No answer','Not applicable','Don\'t know'))
-dat$sex <- factor(dat$`Respondents sex`, levels = c('Female','Male'))
-ggplot(data = dat, aes(x=married, fill=happy)) + geom_bar(position = 'Dodge') +xlab("Marital Status") + ylab("Number of respondents") + labs(title="Number of Responents by Happiness level")
+dat1$married <- factor(dat1$`Marital status`, levels= c('Never married', 'Married','Widowed','Divorced','Separated','No answer'))
+dat1$happy <- factor(dat1$`General happiness`, levels = c('Very happy','Pretty happy','Not too happy','No answer','Not applicable','Don\'t know'))
+dat1$sex <- factor(dat1$`Respondents sex`, levels = c('Female','Male'))
+ggplot(data = dat1, aes(x=married, fill=happy)) + geom_bar(position = 'Dodge') +xlab("Marital Status") + ylab("Number of respondents") + labs(title="Number of Responents vs Marital Status by Happiness level")
 ```
 Looking at the bar graph we can see a few common patterns in that the most common level of happiness is just pretty happy. Beyond that the ratio of very happy to everything else is higher for married respondents than for the not married respondents and the ratio of not to hapy rises for those who were married but arent anymore. This suggests that married people are happier and that having married and then separating or divorcing leads to an unhappy life.
 
 
 Question 2)
 ```{r}
-ggplot(data = dat, aes(x=married, fill=happy)) + geom_bar(position = 'Dodge') + theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5)) + facet_wrap(vars(sex)) +xlab("Marital Status") + ylab("Number of respondents") + labs(title="Number of Responents by Happiness level, faceted by sex")
+ggplot(data = dat1, aes(x=married, fill=happy)) + geom_bar(position = 'Dodge') + theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5)) + facet_wrap(vars(sex)) +xlab("Marital Status") + ylab("Number of respondents") + labs(title="Number of Responents vs Maritial Status by Happiness level, faceted by sex")
 ```
 Comparing the two the only real diiference is that across the board men are more likely to respond as "not to happy" and not "very happy" so I would say that no the sex of the respondent does not affect the relationships found in question 1.
 
 Question idea 1 of 4)
 Does Age affect the political affiliation of a person and how does sex affect this relationship?
 ```{r}
-str(dat)
+dat1 <- dat1[dat1$`Age of respondent` != 'No answer', ]
+dat1 <- dat1[dat1$`Age of respondent` != '89 or older',]
+dat1 <- dat1[dat1$`Age of respondent` != 'Don\'t know',]
+dat1$age = as.numeric(dat1$`Age of respondent`)
+dat1$age = dat1[!is.na(dat1$age),]
+dat1$politicalParty <- factor(dat1$`Political party affiliation`, levels = c('No answer','Don\'t know', 'Other party','Strong republican','Not str republican',
+                                                                             'Ind,near rep','Independent','Ind,near dem','Not str democrat','Strong democrat'))
+ggplot(data = dat1, aes(x=politicalParty, y=age)) + geom_boxplot() + theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5)) + facet_wrap(vars(sex)) +xlab("Age") + ylab("Number of respondents") + labs(title="Number of Responents vs Maritial Status by Happiness level, faceted by sex")
+
+
 ```
 Question idea 2 of 4)
-How has the Political Affiliation and age relationship changed over the years?
+...
 
 
