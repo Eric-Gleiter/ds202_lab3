@@ -35,9 +35,10 @@ ggplot(data = dat, aes(x=married, fill=happy)) + geom_bar(position = 'Dodge') + 
 Comparing the two the only real diiference is that across the board men are more likely to respond as "not to happy" and not "very happy" so I would say that no the sex of the respondent does not affect the relationships found in question 1.
 Question 3)How does the happiness of a respondent relate to the political party affiliation?
 ```{r}
-dat$political <- factor(dat$`Political party affiliation`, levels= c('Strong democrat', 'Not str democrat','Ind,near dem','Independent','Ind,near rep','Not str republican', 'Other party', 'Don\'t know', 'No answer' ))
-ggplot(data = dat, aes(x=political, fill=happy)) + geom_bar(position = 'Dodge') +xlab("political Party Affiliation") + ylab("Number of respondents") + labs(title="Political Party by Happiness level")
+dat$political <- factor(dat$`Political party affiliation`, levels= c('Strong democrat', 'Not str democrat','Ind,near dem','Independent','Ind,near rep','Not str republican','Strong republican', 'Other party', 'Don\'t know', 'No answer' ))
+ggplot(data = dat, aes(x=political, fill=happy)) + geom_bar(position = 'Dodge') +xlab("Political Party Affiliation") + ylab("Number of respondents") + labs(title="Political Party by Happiness level")+theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5))
 ```
+Based on the graph it shows that the happiness does not really differ between party affiliation however it is unusual that not str democrats had a large number of people that were "Pretty happy" compared to the other parties and in general no matter what group each party was pretty happy then very happy and were less likely to be not too happy. 
 
 Question idea 1 of 4)
 Does Age affect the political affiliation of a person and how does sex affect this relationship?
@@ -46,5 +47,13 @@ str(dat)
 ```
 Question idea 2 of 4)
 How has the Political Affiliation and age relationship changed over the years?
+
+Question ideo 3 of 4)
+How does ones education or degree and labor status affect the persons overall happiness?
+```{r}
+dat$labor <- factor(dat$`Labor force status`, levels= c('Working fulltime', 'Working parttime','Temp not working','unempl, laid off','Retired','School','Keeping house'))
+dat$degree <- factor(dat$`Rs highest degree`, levels= c('Lt high school', 'High school','Junior college','Bachelor','Graduate','Don\t know'))
+ggplot(data = dat, aes(x=degree, fill=happy)) + geom_bar(position = 'Dodge') + theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5)) + facet_wrap(vars(labor)) +xlab("degree") + ylab("Number of respondents") + labs(title="degree obtained by Happiness level, faceted by labor")
+```
 
 
