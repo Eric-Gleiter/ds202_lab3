@@ -32,6 +32,14 @@ Question 2)
 ```{r}
 ggplot(data = dat, aes(x=married, fill=happy)) + geom_bar(position = 'Dodge') + theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5)) + facet_wrap(vars(sex)) +xlab("Marital Status") + ylab("Number of respondents") + labs(title="Number of Responents by Happiness level, faceted by sex")
 ```
-Comparing the two the only real diiference is that across the board men are more likely to respond as "not to happy" and not "very happy" so I would say that not the sex does not affect the relationships found in question 1.
+Comparing the two the only real diiference is that across the board men are more likely to respond as "not to happy" and not "very happy" so I would say that no the sex of the respondent does not affect the relationships found in question 1.
+
+Question idea 1 of 4)
+Does Age affect the political affiliation of a person and how does sex affect this relationship?
+```{r}
+str(dat)
+```
+Question idea 2 of 4)
+How has the Political Affiliation and age relationship changed over the years?
 
 
