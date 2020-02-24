@@ -33,9 +33,10 @@ Question 2)
 ggplot(data = dat, aes(x=married, fill=happy)) + geom_bar(position = 'Dodge') + theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5)) + facet_wrap(vars(sex)) +xlab("Marital Status") + ylab("Number of respondents") + labs(title="Number of Responents by Happiness level, faceted by sex")
 ```
 Comparing the two the only real diiference is that across the board men are more likely to respond as "not to happy" and not "very happy" so I would say that no the sex of the respondent does not affect the relationships found in question 1.
-Question 3)
+Question 3)How does the happiness of a respondent relate to the political party affiliation?
 ```{r}
-
+dat$political <- factor(dat$`Political party affiliation`, levels= c('Strong democrat', 'Not str democrat','Ind,near dem','Independent','Ind,near rep','Not str republican', 'Other party', 'Don\'t know', 'No answer' ))
+ggplot(data = dat, aes(x=political, fill=happy)) + geom_bar(position = 'Dodge') +xlab("political Party Affiliation") + ylab("Number of respondents") + labs(title="Political Party by Happiness level")
 ```
 
 Question idea 1 of 4)
