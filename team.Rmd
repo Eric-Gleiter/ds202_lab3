@@ -26,6 +26,7 @@ dat1 <- dat1[dat1$`Age of respondent` != 'Don\'t know',] #following removes age 
 dat1 <- dat1[dat1$`Age of respondent` != '89 or older',]
 dat1 <- dat1[dat1$`Age of respondent` != 'No answer',]
 
+
 #the following is creating and manipulating columns
 dat1$married <- factor(dat1$`Marital status`, levels= c('Never married', 'Married','Widowed','Divorced','Separated','No answer'))
 
@@ -37,6 +38,8 @@ dat1$age <- as.numeric(dat1$`Age of respondent`)
 
 dat1$politicalParty <- factor(dat1$`Political party affiliation`, levels = c('No answer','Don\'t know', 'Other party','Strong republican','Not str republican',
                                                                              'Ind,near rep','Independent','Ind,near dem','Not str democrat','Strong democrat'))
+
+dat1$health <- factor(dat1$`Condition of health`, levels = c('Excellent', 'Good', 'Fair', 'Poor', 'Don\'t know', 'No answer', 'Not applicable'))
 ```
 
 **Question 1)**
@@ -61,7 +64,14 @@ Does Age affect the political affiliation of a person and how does sex affect th
 ggplot(data = dat1, aes(x=politicalParty, y=age)) + geom_boxplot() + theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5)) + facet_wrap(vars(sex)) +xlab("Political Affliation") + ylab("Age") + labs(title="Boxplot of Age by political Affliation, faceted by sex")
 ```
 
+Looking at the side by side box plots we can see a fairly obvious trend. The younger someone is the more likly they are to be independent. Additionally it is interesting to not that the party itself doesnt matter with regards to age. The only thing that seems to happen is that as people get older they are more likely to indentify as strongly one way or the other. Looking at the differences caused by sex the only real difference we can see is that older men are more likly to be democrate where as older females are more likly to be strong republicans.
+
+
 **Question idea 2 of 4)**
-...
+How does age impact happiness, and how does Health affect this?
 
+```{r}
+ggplot(data = dat1, aes(x=happy, y=age)) + geom_boxplot() + theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5)) + facet_wrap(vars(health)) +xlab("Happiness") + ylab("Age") + labs(title="Boxplot of Age by happiness, faceted by Health")
+```
 
+The relationship between and age seems to not actually matter the median age of all happiness levels are about the same there isnt one group that is happier than another. It interesting to  note that as median age increases the health condition decreases. The most interesting thing is that when people respond that they don't know what their health is like then there is a relationship between age and happiness. Older peole tend to be happier when they dont know their health condition. It seems to be that if you want to stay happy when you get old stop worrying about your health. 
