@@ -1,8 +1,3 @@
-<<<<<<< Updated upstream
-install.packages('readxl')
-dat<-readxl::read_xls('GSSlab3data.xls')
-dat
-=======
 ---
 title: "Lab 3"
 author: "Eric Gleiter; Brandon Xicon"
@@ -52,4 +47,3 @@ Question idea 2 of 4)
 How has the Political Affiliation and age relationship changed over the years?
 
 
->>>>>>> Stashed changes
